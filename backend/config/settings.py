@@ -1,6 +1,5 @@
 """
 Django Settings for Student Registration System
-Works for both local development and Railway deployment.
 """
 import os
 from datetime import timedelta
@@ -62,12 +61,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-# Database — always use public Railway host to avoid internal DNS issues
+# ── Database ──────────────────────────────────────────────────────────────────
 _DB_HOST = os.environ.get('MYSQLHOST', '127.0.0.1')
 _DB_PORT = os.environ.get('MYSQLPORT', '3306')
 
-# Railway injects mysql.railway.internal which requires private networking.
-# Override with the public hostname that always works.
 if _DB_HOST == 'mysql.railway.internal':
     _DB_HOST = 'maglev.proxy.rlwy.net'
     _DB_PORT = '38952'
@@ -88,6 +85,7 @@ DATABASES = {
     }
 }
 
+# ── Auth ──────────────────────────────────────────────────────────────────────
 AUTH_USER_MODEL = 'accounts.User'
 
 REST_FRAMEWORK = {
@@ -112,14 +110,24 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
-_cors_env = os.environ.get('CORS_ALLOWED_ORIGINS', '')
-CORS_ALLOWED_ORIGINS = (
-    [o.strip() for o in _cors_env.split(',') if o.strip()]
-    if _cors_env
-    else ['http://localhost:3000', 'http://127.0.0.1:3000']
-)
+# ── CORS ──────────────────────────────────────────────────────────────────────
+# Allow all origins so deployment works immediately.
+# Once confirmed working, restrict to your Vercel domain only.
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
 
+# ── Static / Media ────────────────────────────────────────────────────────────
 STATIC_URL  = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -127,6 +135,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL  = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+# ── Misc ──────────────────────────────────────────────────────────────────────
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
