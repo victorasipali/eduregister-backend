@@ -126,6 +126,8 @@ CORS_ALLOWED_ORIGINS += [
     "https://eduregister-backend.up.railway.app",
 ]
 
+
+CORS_ALLOWED_ORIGINS=True
 CORS_ALLOW_CREDENTIALS = True
 
 
