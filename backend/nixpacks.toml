@@ -1,5 +1,5 @@
 [phases.setup]
-nixPkgs = ["python312", "pkg-config"]
+nixPkgs = ["python312"]
 
 [phases.install]
 cmds = ["pip install -r requirements.txt"]
@@ -8,18 +8,4 @@ cmds = ["pip install -r requirements.txt"]
 cmds = ["python manage.py collectstatic --noinput"]
 
 [start]
-cmd = "python manage.py migrate && gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --timeout 120"
-```
-
----
-
-## Fix 3 — Make sure these files exist in `backend/`
-
-**`backend/Procfile`** (no extension)
-```
-web: python manage.py migrate && gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --workers 2
-```
-
-**`backend/runtime.txt`**
-```
-python-3.12.0
+cmd = "python manage.py migrate --noinput && gunicorn config.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --timeout 120"
