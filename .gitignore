@@ -1,0 +1,30 @@
+echo node_modules/ >> .gitignore
+echo frontend/node_modules/ >> .gitignore
+echo frontend/dist/ >> .gitignore
+echo backend/venv/ >> .gitignore
+echo backend/__pycache__/ >> .gitignore
+echo backend/*.pyc >> .gitignore
+echo backend/staticfiles/ >> .gitignore
+echo backend/media/ >> .gitignore
+```
+
+Or create the file manually — open `.gitignore` in the project root and paste:
+```
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.env.local
+
+# Backend
+backend/venv/
+backend/__pycache__/
+backend/**/__pycache__/
+backend/*.pyc
+backend/**/*.pyc
+backend/staticfiles/
+backend/media/
+backend/.env
+
+# OS
+.DS_Store
+Thumbs.db
