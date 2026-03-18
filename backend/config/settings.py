@@ -116,19 +116,29 @@ SIMPLE_JWT = {
 #CORS_ALLOW_ALL_ORIGINS = True
 #CORS_ALLOW_ALL_ORIGINS = os.environ.get('CORS_ALLOW_ALL_ORIGINS', 'True') == 'True'
 # CORS
+# ── CORS ─────────────────────────────────────────────────────
+
+#CORS_ALLOW_ALL_ORIGINS = False  # safer
+CORS_ALLOW_ALL_ORIGINS = True  # for testing
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "https://eduregister-backend.vercel.app",
 ]
 
-# Optional: allow Railway URL too (useful for testing)
-CORS_ALLOWED_ORIGINS += [
-    "https://eduregister-backend.up.railway.app",
-]
-
-
-CORS_ALLOWED_ORIGINS=True
 CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
 
 
 # ── Static / Media ────────────────────────────────────────────────────────────
