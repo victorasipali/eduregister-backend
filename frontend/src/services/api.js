@@ -39,7 +39,9 @@ api.interceptors.response.use(
 
       try {
         const refresh = localStorage.getItem('refresh_token')
-        const { data } = await axios.post('/api/auth/token/refresh/', { refresh })
+        //const { data } = await axios.post('/api/auth/token/refresh/', { refresh })
+        //const { data } = await axios.post(`${import.meta.env.VITE_API_BASE_URL || 'https://eduregister-backend.up.railway.app/api'}/auth/token/refresh/`, { refresh })
+        const { data } = await api.post('/auth/token/refresh/', { refresh })
         localStorage.setItem('access_token', data.access)
         queue.forEach(({ resolve }) => resolve())
         queue = []
