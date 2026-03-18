@@ -30,10 +30,10 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # MUST BE FIRST
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -114,19 +114,20 @@ SIMPLE_JWT = {
 # Allow all origins so deployment works immediately.
 # Once confirmed working, restrict to your Vercel domain only.
 #CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_ALL_ORIGINS = os.environ.get('CORS_ALLOW_ALL_ORIGINS', 'True') == 'True'
-CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_HEADERS = [
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
+#CORS_ALLOW_ALL_ORIGINS = os.environ.get('CORS_ALLOW_ALL_ORIGINS', 'True') == 'True'
+# CORS
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "https://eduregister-backend.vercel.app",
 ]
+
+# Optional: allow Railway URL too (useful for testing)
+CORS_ALLOWED_ORIGINS += [
+    "https://eduregister-backend.up.railway.app",
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
 
 # ── Static / Media ────────────────────────────────────────────────────────────
 STATIC_URL  = '/static/'
