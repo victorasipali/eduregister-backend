@@ -113,7 +113,8 @@ SIMPLE_JWT = {
 # ── CORS ──────────────────────────────────────────────────────────────────────
 # Allow all origins so deployment works immediately.
 # Once confirmed working, restrict to your Vercel domain only.
-CORS_ALLOW_ALL_ORIGINS = True
+#CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = os.environ.get('CORS_ALLOW_ALL_ORIGINS', 'True') == 'True'
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = [
     'accept',
