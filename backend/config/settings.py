@@ -62,39 +62,21 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 # ── Database ──────────────────────────────────────────────────────────────────
-_DB_HOST = os.environ.get('MYSQLHOST', '127.0.0.1')
-_DB_PORT = os.environ.get('MYSQLPORT', '3306')
+# Set these in Railway → Variables:
+#   DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD
+#
+# Railway MySQL auto-injects MYSQLHOST etc. but uses internal hostname.
+# We read custom DB_* vars first, then fall back to MYSQL* vars.
+# Set DB_HOST = maglev.proxy.rlwy.net (public host) in Railway variables.
 
-if _DB_HOST == 'mysql.railway.internal':
-    _DB_HOST = 'maglev.proxy.rlwy.net'
-    _DB_PORT = '38952'
-
-#---DATABASES = {
-#    'default': {
-#        'ENGINE':   'django.db.backends.mysql',
-#        'NAME':     os.environ.get('MYSQLDATABASE', 'student_registration_db'),
-#        'USER':     os.environ.get('MYSQLUSER',     'root'),
-#        'PASSWORD': os.environ.get('MYSQLPASSWORD', ''),
-#        'HOST':     _DB_HOST,
-#        'PORT':     _DB_PORT,
-#        'OPTIONS': {
-#            'charset': 'utf8mb4',
-#            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-#            'connect_timeout': 10,
-#        },
-#    }
-#}  
-
-
-# ── Database — hardcoded for Railway (temporary) ──────────────────────────────
 DATABASES = {
     'default': {
         'ENGINE':   'django.db.backends.mysql',
-        'NAME':     'railway',
-        'USER':     'root',
-        'PASSWORD': 'rJfUEXoaYPymoZIVPIDvUAfHCCffVLBw',
-        'HOST':     'maglev.proxy.rlwy.net',
-        'PORT':     '38952',
+        'NAME':     os.environ.get('DB_NAME',     'railway'),
+        'USER':     os.environ.get('DB_USER',     'root'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', ''),
+        'HOST':     os.environ.get('DB_HOST',     '127.0.0.1'),
+        'PORT':     os.environ.get('DB_PORT',     '3306'),
         'OPTIONS': {
             'charset': 'utf8mb4',
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
@@ -129,21 +111,6 @@ SIMPLE_JWT = {
 }
 
 # ── CORS ──────────────────────────────────────────────────────────────────────
-# Allow all origins so deployment works immediately.
-# Once confirmed working, restrict to your Vercel domain only.
-#CORS_ALLOW_ALL_ORIGINS = True
-#CORS_ALLOW_ALL_ORIGINS = os.environ.get('CORS_ALLOW_ALL_ORIGINS', 'True') == 'True'
-# CORS
-# ── CORS ─────────────────────────────────────────────────────
-
-#CORS_ALLOW_ALL_ORIGINS = False  # safer
-# ── CORS ─────────────────────────────────────────────────────
-
-# ── CORS ─────────────────────────────────────────────────────
-
-# ── CORS ─────────────────────────────────────────────────────
-
-# ── CORS ──────────────────────────────────────────────────────────────────────
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = [
@@ -160,6 +127,7 @@ CORS_ALLOW_HEADERS = [
 CORS_ALLOW_METHODS = [
     'DELETE', 'GET', 'OPTIONS', 'PATCH', 'POST', 'PUT',
 ]
+
 # ── Static / Media ────────────────────────────────────────────────────────────
 STATIC_URL  = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
