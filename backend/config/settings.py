@@ -128,7 +128,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "https://eduregister-backend.vercel.app",   # if frontend hosted there
-    "https://eduregister-backend-qpbm8um3p-victor-asipalis-projects.vercel.app",  # update this
+    #"https://eduregister-backend-qpbm8um3p-victor-asipalis-projects.vercel.app",  # update this
 ]
 
 CORS_ALLOW_CREDENTIALS = True
