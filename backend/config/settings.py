@@ -121,7 +121,15 @@ SIMPLE_JWT = {
 #CORS_ALLOW_ALL_ORIGINS = False  # safer
 # ── CORS ─────────────────────────────────────────────────────
 
-CORS_ALLOW_ALL_ORIGINS = True  # TEMP: for debugging (works immediately)
+# ── CORS ─────────────────────────────────────────────────────
+
+CORS_ALLOW_ALL_ORIGINS = False
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "https://eduregister-backend.vercel.app",   # if frontend hosted there
+    "https://your-frontend-domain.vercel.app",  # update this
+]
 
 CORS_ALLOW_CREDENTIALS = True
 
