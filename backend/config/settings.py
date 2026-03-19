@@ -123,37 +123,13 @@ SIMPLE_JWT = {
 
 # ── CORS ─────────────────────────────────────────────────────
 
-CORS_ALLOW_ALL_ORIGINS = True
+# ── CORS ─────────────────────────────────────────────────────
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "https://eduregister-backend.vercel.app",   # if frontend hosted there
-    #"https://eduregister-backend-qpbm8um3p-victor-asipalis-projects.vercel.app",  # update this
-]
+CORS_ALLOW_ALL_ORIGINS = True  # TEMP for debugging ONLY
+CORS_ALLOW_CREDENTIALS = False  # IMPORTANT (must be False when allow all)
 
-CORS_ALLOW_CREDENTIALS = True
-CORS_PREFLIGHT_MAX_AGE = 86400
-CORS_ALLOW_HEADERS = [
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
-]
-
-CORS_ALLOW_METHODS = [
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
-]
-
+CORS_ALLOW_HEADERS = ['*']
+CORS_ALLOW_METHODS = ['*']
 
 # ── Static / Media ────────────────────────────────────────────────────────────
 STATIC_URL  = '/static/'
