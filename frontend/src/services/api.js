@@ -7,7 +7,8 @@ import axios from 'axios'
 })
 */
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || 'https://eduregister-backend.up.railway.app/api',
+  //baseURL: import.meta.env.VITE_API_BASE_URL || 'https://eduregister-backend.up.railway.app/api',
+  baseURL: "https://eduregister-backend-production.up.railway.app/api",
   headers: { 'Content-Type': 'application/json' },
 })
 
