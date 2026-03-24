@@ -111,7 +111,10 @@ SIMPLE_JWT = {
 }
 
 # ── CORS ──────────────────────────────────────────────────────────────────────
-CORS_ALLOW_ALL_ORIGINS = True
+# ── CORS_ALLOW_ALL_ORIGINS = True  ──────────────────────────────────────────────────────────────────────
+CORS_ALLOWED_ORIGINS = [
+    "https://eduregister-backend.vercel.app",
+]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_HEADERS = [
     'accept',
@@ -126,6 +129,10 @@ CORS_ALLOW_HEADERS = [
 ]
 CORS_ALLOW_METHODS = [
     'DELETE', 'GET', 'OPTIONS', 'PATCH', 'POST', 'PUT',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://eduregister-backend.vercel.app",
 ]
 
 # ── Static / Media ────────────────────────────────────────────────────────────
